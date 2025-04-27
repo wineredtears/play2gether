@@ -16,7 +16,9 @@ class ThreadController extends Controller
     }
 
     public function posts(int $id) {
-        $posts = PostModel::where('thread_id', '=', $id)->get();
+        $posts = PostModel::where('thread_id', '=', $id)
+            ->where('is_deleted', false)
+            ->get();
 
         return PostResource::collection($posts);
     }

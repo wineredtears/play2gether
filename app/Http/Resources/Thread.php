@@ -22,7 +22,7 @@ class Thread extends JsonResource
             'id'=>$this->id,
             'userId'=>$this->userId,
             'name'=>$this->name,
-            'createdAt'=>$this->createdAt->toISOString(),
+            'createdAt'=>$this->createdAt,
             'postCount'=>$this->posts->count(),
         ];
     }

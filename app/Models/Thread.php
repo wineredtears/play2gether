@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -27,5 +28,8 @@ class Thread extends BaseModel
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+    public function category(): BelongsTo {
+        return $this->belongsTo(Category::class);
     }
 }
