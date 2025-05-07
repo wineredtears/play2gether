@@ -25,4 +25,5 @@ class Post extends BaseModel
         return $this->belongsTo(Thread::class);
     }
 
+
 }

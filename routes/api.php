@@ -22,3 +22,5 @@ Route::post('/threads', [ThreadController::class, 'create']);
 Route::delete('/threads/{id}', [ThreadController::class, 'delete']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{slug}/threads', [CategoryController::class, 'threads']);
+Route::post('/posts', [PostController::class, 'create']);
+Route::delete('/posts/{id}', [PostController::class, 'delete']);
