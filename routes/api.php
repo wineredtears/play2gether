@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ThreadController;
 use App\Http\Controllers\PostController;
@@ -16,11 +17,20 @@ Route::get('/test', function () {
     property' => 'value']);
 });
 
+Route::prefix('/auth')->group(function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+});
+
 Route::get('/threads', [ThreadController::class, 'index']);
 Route::get('/threads/{id}/posts', [ThreadController::class, 'posts']);
-Route::post('/threads', [ThreadController::class, 'create']);
-Route::delete('/threads/{id}', [ThreadController::class, 'delete']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{slug}/threads', [CategoryController::class, 'threads']);
-Route::post('/posts', [PostController::class, 'create']);
-Route::delete('/posts/{id}', [PostController::class, 'delete']);
+
+Route::middleware('auth')->group(function () {
+    Route::post('/threads', [ThreadController::class, 'create']);
+    Route::delete('/threads/{id}', [ThreadController::class, 'delete']);
+    Route::post('/posts', [PostController::class, 'create']);
+    Route::delete('/posts/{id}', [PostController::class, 'delete']);
+});

@@ -6,6 +6,7 @@ use App\Http\Requests\PostCreateRequest;
 use App\Http\Resources\Post as PostResource;
 use App\Models\Post as PostModel;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -14,9 +15,11 @@ class PostController extends Controller
     }
 
     public function create(PostCreateRequest $request) {
+        $user = Auth::user();
+
         $post = new PostModel();
         $post->threadId = $request->input('threadId');
-        $post->userId = $request->input('userId');
+        $post->userId = $request->input($user->id);
         $post->content = $request->input('content');
 
         $post->save();

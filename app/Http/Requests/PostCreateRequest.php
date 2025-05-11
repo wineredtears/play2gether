@@ -23,7 +23,6 @@ class PostCreateRequest extends FormRequest
     {
         return [
             'threadId' => 'required|integer|exists:threads,id',
-            'userId' => 'required|integer',
             'content' => 'required|string|max:510|min:5',
         ];
     }

@@ -8,6 +8,7 @@ use App\Http\Resources\Thread as ThreadResource;
 use App\Models\Post as PostModel;
 use App\Models\Thread as ThreadModel;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ThreadController extends Controller
 {
@@ -24,9 +25,11 @@ class ThreadController extends Controller
     }
 
     public function create(ThreadCreateRequest $request) {
+        $user = Auth::user();
+
         $thread = new ThreadModel();
         $thread->categoryId = $request->input('categoryId');
-        $thread->userId = $request->input('userId');
+        $thread->userId = $request->input($user->id);
         $thread->name = $request->input('name');
 
         $thread->save();

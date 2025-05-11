@@ -23,7 +23,6 @@ class ThreadCreateRequest extends FormRequest
     {
         return [
             'categoryId' => 'required|integer|exists:categories,id',
-            'userId' => 'required|integer',
             'name' => 'required|string|max:255|min:5',
         ];
     }
