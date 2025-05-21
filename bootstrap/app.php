@@ -12,8 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->append(\Illuminate\Session\Middleware\StartSession::class);
-        $middleware->append(\Illuminate\View\Middleware\ShareErrorsFromSession::class);
+        //$middleware->append(\Illuminate\Session\Middleware\StartSession::class);
+        //$middleware->append(\Illuminate\View\Middleware\ShareErrorsFromSession::class);
+        //$middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -24,6 +24,8 @@ class Post extends BaseModel
     {
         return $this->belongsTo(Thread::class);
     }
-
+    public function category(): BelongsTo {
+        return $this->belongsTo(Category::class);
+    }
 
 }

@@ -29,7 +29,7 @@ class ThreadController extends Controller
 
         $thread = new ThreadModel();
         $thread->categoryId = $request->input('categoryId');
-        $thread->userId = $request->input($user->id);
+        $thread->userId = $user->id;
         $thread->name = $request->input('name');
 
         $thread->save();
@@ -39,6 +39,7 @@ class ThreadController extends Controller
 
     public function delete(int $id) {
         $thread = ThreadModel::where('id', $id)->first();
+        if ($thread -> userId !== Auth::id()) { return response() -> noContent(401); }
         $thread -> is_deleted = true;
         $thread -> deleted_at = Carbon::now();
         $thread -> save();

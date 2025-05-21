@@ -19,7 +19,7 @@ class PostController extends Controller
 
         $post = new PostModel();
         $post->threadId = $request->input('threadId');
-        $post->userId = $request->input($user->id);
+        $post->userId = $user->id;
         $post->content = $request->input('content');
 
         $post->save();
@@ -29,6 +29,7 @@ class PostController extends Controller
 
     public function delete(int $id) {
         $post = PostModel::where('id', $id)->first();
+        if ($post -> userId !== Auth::id()) { return response() -> noContent(401); }
         $post -> is_deleted = true;
         $post -> deleted_at = Carbon::now();
         $post -> save();

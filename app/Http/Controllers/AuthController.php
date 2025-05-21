@@ -25,16 +25,14 @@ class AuthController extends Controller
                 'name' => $request->input('name'),
                 'password' => $request->input('password')
         ])) {
-            $request->session()->regenerate();
-
-            return response() -> noContent();
+            return response() -> json(['token'=>Auth::user()->createToken('basic')->plainTextToken]);
         }
         return response() -> noContent(403);
     }
     public function logout() {
         $user = Auth::user();
 
-        Auth::logout();
+        $user->tokens()->delete();
 
         return response() -> json(['name'=>$user->name]);
     }

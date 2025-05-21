@@ -23,7 +23,7 @@ class Thread extends JsonResource
             'userId'=>$this->userId,
             'name'=>$this->name,
             'createdAt'=>$this->createdAt,
-            'postCount'=>$this->posts->count(),
+            'postCount'=>$this->posts->where('isDeleted', false)->count(),
         ];
     }
 }
